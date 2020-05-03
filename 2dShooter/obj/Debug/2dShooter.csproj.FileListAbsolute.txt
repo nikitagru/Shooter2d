@@ -1,0 +1,10 @@
+E:\С#_Projects\2dShooter\2dShooter\bin\Debug\2dShooter.exe.config
+E:\С#_Projects\2dShooter\2dShooter\bin\Debug\2dShooter.exe
+E:\С#_Projects\2dShooter\2dShooter\bin\Debug\2dShooter.pdb
+E:\С#_Projects\2dShooter\2dShooter\obj\Debug\2dShooter.csprojAssemblyReference.cache
+E:\С#_Projects\2dShooter\2dShooter\obj\Debug\_2dShooter.Form1.resources
+E:\С#_Projects\2dShooter\2dShooter\obj\Debug\_2dShooter.Properties.Resources.resources
+E:\С#_Projects\2dShooter\2dShooter\obj\Debug\2dShooter.csproj.GenerateResource.cache
+E:\С#_Projects\2dShooter\2dShooter\obj\Debug\2dShooter.csproj.CoreCompileInputs.cache
+E:\С#_Projects\2dShooter\2dShooter\obj\Debug\2dShooter.exe
+E:\С#_Projects\2dShooter\2dShooter\obj\Debug\2dShooter.pdb
