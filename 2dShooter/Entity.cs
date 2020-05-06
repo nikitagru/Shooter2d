@@ -12,11 +12,23 @@ namespace _2dShooter
         public int posX;
         public int posY;
 
-        public int dirX;
-        public int dirY;
+        public int maxJumpHeight = 10;
+        public int currentJumpHeight = 0;
 
+        public int currentAnimation;
+        public int currentLimit = 7;
+        
         public int width = 49;
-        public int height = 48;
+        public int height = 45;
+        public int flip;
+
+        public bool isPressW;
+        public bool isPressA;
+        public bool isPressD;
+        public bool isMoving;
+        public bool isFalled;
+        public bool isJumped;
+        public bool isShooting;
 
         public Image entityImage;
 
@@ -25,6 +37,12 @@ namespace _2dShooter
             this.posX = posX;
             this.posY = posY;
             this.entityImage = spriteSheet;
+            this.currentAnimation = 0;
+            flip = 0;
+            this.isMoving = false;
+            this.isFalled = true;
+            this.isJumped = false;
+            this.isShooting = false;
         }
     }
 }
