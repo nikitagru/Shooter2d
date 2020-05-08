@@ -112,5 +112,14 @@
   <ItemGroup>
     <None Include="Resources\bullet.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bulletArr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bulletNew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\space.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

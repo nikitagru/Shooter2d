@@ -93,6 +93,26 @@ namespace _2dShooter.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bulletArr {
+            get {
+                object obj = ResourceManager.GetObject("bulletArr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bulletNew {
+            get {
+                object obj = ResourceManager.GetObject("bulletNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap finPlayer1 {
             get {
                 object obj = ResourceManager.GetObject("finPlayer1", resourceCulture);
@@ -146,6 +166,16 @@ namespace _2dShooter.Properties {
         internal static System.Drawing.Bitmap player2 {
             get {
                 object obj = ResourceManager.GetObject("player2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap space {
+            get {
+                object obj = ResourceManager.GetObject("space", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

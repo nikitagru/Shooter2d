@@ -21,12 +21,15 @@ namespace _2dShooter
         public Model model = new Model();
 
         Gun gun = new Gun();
+
+        public static Image bullet;
         public Form1()
         {
             InitializeComponent();
 
             timer1.Interval = 30;
             timer1.Tick += new EventHandler(Update);
+
 
             KeyDown += new KeyEventHandler(OnPress);
             KeyUp += new KeyEventHandler(OnKeyUp);
@@ -36,25 +39,6 @@ namespace _2dShooter
 
         }
 
-        //private void ShowBullet(Entity entity, Gun gun, Map map)
-        //{
-        //    PictureBox bullet = new PictureBox();
-        //    bullet.Location = new Point(entity.posX + 40, entity.posY + 17);
-        //    bullet.Image = 
-        //    bullet.Size = new Size(gun.width, gun.height);
-
-        //    var mapArr = map.map;
-        //    var mapY = Math.Abs(entity.posY) / map.linkSize;
-        //    var mapX = Math.Abs(entity.posX) / map.linkSize;
-        //    var bulletX = entity.posX + 40;
-        //    var bulletY = entity.posY + 17;
-        //    while (mapArr[mapY, mapX] == 1 || mapArr[mapY, mapX] == 6)
-        //    {
-        //        bullet.Location = new Point(bulletX, bulletY);
-        //        bulletX++;
-        //        mapY++;
-        //    }
-        //}
 
         private void OnPress(object sender, KeyEventArgs e)
         {
@@ -102,6 +86,7 @@ namespace _2dShooter
         {
             map.Init();
             gun.Init();
+            bullet = gun.bulletImage;
             var playerPath = new Bitmap(Properties.Resources.finPlayer1 as Bitmap);
             player = new Entity(310, 100, playerPath);
             timer1.Start();
@@ -112,7 +97,7 @@ namespace _2dShooter
             Graphics g = e.Graphics;
             map.DrawMap(g);
             view.PlayAnimation(g, player);
-            view.ShootAnimation(g, gun, map, player);
+            view.ShootInit(g, gun, player);
         }
 
         private void Timer1_Tick_1(object sender, EventArgs e)
@@ -132,6 +117,14 @@ namespace _2dShooter
                 model.MovingW(player, -13, map);
                 model.Moving(player, 0, 0);
             }
+            if (player.isShooting)
+            {
+                this.Paint += new PaintEventHandler(Shoot);
+            }
+        }
+        private void Shoot(object sender, PaintEventArgs e)
+        {
+            view.ShootAnimation();
         }
     }
 }

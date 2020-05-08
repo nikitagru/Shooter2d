@@ -12,13 +12,16 @@ namespace _2dShooter
         public int width;
         public int height;
 
+        public int currentFrame;
+        public int frameLimit = 6;
+
         public int posX;
 
         public Image bulletImage;
 
         public void Init()
         {
-            bulletImage = new Bitmap(Properties.Resources.bullet as Bitmap);
+            bulletImage = new Bitmap(Properties.Resources.bulletNew as Bitmap);
             width = bulletImage.Width;
             height = bulletImage.Height;
         }

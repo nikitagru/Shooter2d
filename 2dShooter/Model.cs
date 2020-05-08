@@ -12,7 +12,8 @@ namespace _2dShooter
         {
             var mapArr = map.map;
             
-            if (mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 1)
+            if (mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 1
+                && mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 6)
             {
                 if (mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] == 4)
                     return false;
@@ -45,9 +46,7 @@ namespace _2dShooter
                 for(var i = 0; i < 12; i++)
                 {
                     entity.posY += dirY;
-                    System.Threading.Thread.Sleep(8);
                 }
-                
                 entity.isJumped = true;
             }
                 

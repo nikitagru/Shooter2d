@@ -4,13 +4,24 @@ using System.Drawing;
 using System.Linq;
 using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace _2dShooter
 {
     public class View
     {
+        private Entity gunOwner;
+        private Graphics weaponGraphics;
+        private Gun weapon;
+
+        private int posX;
+        private int posY;
+
+        private int counter = 0;
+
         public Image CurrentFrame(Image image, Rectangle section)
         {
             Bitmap bitmap = image as Bitmap;
@@ -57,27 +68,60 @@ namespace _2dShooter
             }
         }
 
-        public void ShootAnimation(Graphics g, Gun gun, Map map, Entity entity)
-        {
-            if (entity.isShooting)
-            {
-                PictureBox bullet = new PictureBox();
-                bullet.Location = new Point(entity.posX + 40, entity.posY + 17);
-                bullet.Image = gun.bulletImage;
-                bullet.Size = new Size(gun.width, gun.height);
+        //public void ShootAnimation(Graphics g, Gun gun, Map map, Entity entity)
+        //{
+        //    if (entity.isShooting)
+        //    {
+        //        PictureBox bullet = new PictureBox();
+        //        bullet.Location = new Point(entity.posX + 40, entity.posY + 17);
+        //        bullet.Image = gun.bulletImage;
+        //        bullet.Size = new Size(gun.width, gun.height);
 
-                var mapArr = map.map;
-                var mapY = Math.Abs(entity.posY) / map.linkSize;
-                var mapX = Math.Abs(entity.posX) / map.linkSize;
-                var bulletX = entity.posX + 40;
-                var bulletY = entity.posY + 17;
-                while (mapArr[mapY, mapX] == 1 || mapArr[mapY, mapX] == 6)
-                {
-                    bullet.Location = new Point(bulletX, bulletY);
-                    bulletX++;
-                    mapY++;
-                }
+        //        var mapArr = map.map;
+        //        var mapY = Math.Abs(entity.posY) / map.linkSize;
+        //        var mapX = Math.Abs(entity.posX) / map.linkSize;
+        //        var bulletX = entity.posX + 40;
+        //        var bulletY = entity.posY + 17;
+        //        while (mapArr[mapY, mapX] == 1 || mapArr[mapY, mapX] == 6)
+        //        {
+        //            bullet.Location = new Point(bulletX, bulletY);
+        //            bulletX++;
+        //            mapY = Math.Abs(bulletX + 1) / map.linkSize;
+        //        }
+        //    }
+        //}
+
+        public void ShootAnimation()
+        {
+            if (gunOwner.isShooting)
+            {
+                var currentFrame = weapon.bulletImage;
+                var bulletX = gunOwner.posX + 40;
+                
+                weaponGraphics.DrawImage(currentFrame, new Point(bulletX, gunOwner.posY + 15));
+                
             }
+            gunOwner.isShooting = false;
         }
+
+        public void ShootInit(Graphics g, Gun gun, Entity entity)
+        {
+            gunOwner = entity;
+            weapon = gun;
+            weaponGraphics = g;
+            
+        }
+
+        public void Shooting(Entity entity, Gun gun, Graphics g)
+        {
+            posX = entity.posX + 40;
+            posY = entity.posY + 15;
+            var spaceFrame = new Bitmap(Properties.Resources.space as Bitmap);
+            var currentFrame = gun.bulletImage;
+            g.DrawImage(currentFrame, new Point(posX, posY));
+            g.DrawImage(spaceFrame, new Point(posX, posY));
+            
+        }
+
     }
 }
