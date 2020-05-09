@@ -27,7 +27,6 @@ namespace _2dShooter
 
             Bitmap player = bitmap.Clone(section, bitmap.PixelFormat);
             
-
             return player;
         }
 
@@ -41,14 +40,16 @@ namespace _2dShooter
                     if (entity.isPressA)
                     {
                         entity.flip = 3;
+                        entity.idleFlip = 1;
                     }
                     else if (entity.isPressD)
                     {
                         entity.flip = 2;
+                        entity.idleFlip = 0;
                     }
 
                     var jumpFrame = CurrentFrame(entity.entityImage, new Rectangle(49 * entity.currentAnimation, 45 * entity.flip, entity.width, entity.height));
-
+                    
                     g.DrawImage(jumpFrame, new Point(entity.posX + map.delta.X, entity.posY + map.delta.Y));
 
                 }
@@ -66,7 +67,7 @@ namespace _2dShooter
             } else
             {
                 var idleImage = new Bitmap(Properties.Resources.idlePlayer as Bitmap);
-                var currentFrame = CurrentFrame(idleImage, new Rectangle(49 * 0, 45 * entity.flip, entity.width - 4, entity.height));
+                var currentFrame = CurrentFrame(idleImage, new Rectangle(49 * 0, 45 * entity.idleFlip, entity.width - 4, entity.height));
                 g.DrawImage(currentFrame, new Point(entity.posX + map.delta.X, entity.posY + map.delta.Y));
             }
         }
@@ -84,7 +85,6 @@ namespace _2dShooter
                 }
                 
                 weaponGraphics.DrawImage(currentFrame, new Point(bulletX + map.delta.X, gunOwner.posY + 15 + map.delta.Y));
-                
             }
             gunOwner.isShooting = false;
         }
@@ -104,7 +104,6 @@ namespace _2dShooter
             var currentFrame = gun.bulletImage;
             g.DrawImage(currentFrame, new Point(posX, posY));
             g.DrawImage(spaceFrame, new Point(posX, posY));
-            
         }
 
     }

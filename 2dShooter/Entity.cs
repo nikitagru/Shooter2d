@@ -21,6 +21,7 @@ namespace _2dShooter
         public int width = 49;
         public int height = 45;
         public int flip;
+        public int idleFlip;
 
         public bool isPressW;
         public bool isPressA;
@@ -45,6 +46,7 @@ namespace _2dShooter
             this.isFalled = true;
             this.isJumped = false;
             this.isShooting = false;
+            this.idleFlip = 0;
         }
     }
 }

@@ -41,16 +41,16 @@ namespace _2dShooter
             switch(e.KeyCode)
             {
                 case Keys.A:
-                    player.flip = 1;
                     player.isPressA = true;
-                    player.isWasPressedA = false;
                     player.isMoving = true;
+                    player.flip = 1;
+                    player.idleFlip = 1;
                     break;
                 case Keys.D:
-                    player.flip = 0;
                     player.isPressD = true;
-                    player.isWasPressedD = false;
                     player.isMoving = true;
+                    player.flip = 0;
+                    player.idleFlip = 0;
                     break;
                 case Keys.W:
                     if (player.isFalled)
@@ -63,16 +63,7 @@ namespace _2dShooter
                 case Keys.Space:
                     player.isShooting = true;
                     break;
-                default:
-                    if (player.isWasPressedA)
-                    {
-                        player.flip = 3;
-                    }
-                    if (player.isWasPressedD)
-                    {
-                        player.flip = 2;
-                    }
-                    break;
+                
             }
         }
 
@@ -118,8 +109,6 @@ namespace _2dShooter
                     map.delta.X += 5;
                 }
                 model.MovingA(player, -5, 0, map);
-                
-                player.isWasPressedA = true;
                 model.Moving(player, 0, 0);
             }
             if (player.isPressD)
@@ -129,8 +118,6 @@ namespace _2dShooter
                     map.delta.X -= 5;
                 }
                 model.MovingD(player, 5, 0, map);
-                
-                player.isWasPressedD = true;
                 model.Moving(player, 0, 0);
             }
             if (player.isPressW)
