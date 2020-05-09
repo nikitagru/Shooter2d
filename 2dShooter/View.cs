@@ -20,7 +20,7 @@ namespace _2dShooter
         private int posX;
         private int posY;
 
-        private int counter = 0;
+        
 
         public Image CurrentFrame(Image image, Rectangle section)
         {
@@ -31,7 +31,7 @@ namespace _2dShooter
             return player;
         }
 
-        public void PlayAnimation(Graphics g, Entity entity)
+        public void PlayAnimation(Graphics g, Entity entity, Map map)
         {
             if (entity.isMoving)
             {
@@ -48,7 +48,7 @@ namespace _2dShooter
 
                     var jumpFrame = CurrentFrame(entity.entityImage, new Rectangle(49 * entity.currentAnimation, 45 * entity.flip, entity.width, entity.height));
 
-                    g.DrawImage(jumpFrame, new Point(entity.posX, entity.posY));
+                    g.DrawImage(jumpFrame, new Point(entity.posX + map.delta.X, entity.posY + map.delta.Y));
 
                 } else if (entity.currentAnimation < entity.currentLimit)
                 {
@@ -60,11 +60,11 @@ namespace _2dShooter
                 }
                 var currentFrame = CurrentFrame(entity.entityImage, new Rectangle(49 * entity.currentAnimation, 45 * entity.flip, entity.width, entity.height));
 
-                g.DrawImage(currentFrame, new Point(entity.posX, entity.posY));
+                g.DrawImage(currentFrame, new Point(entity.posX + map.delta.X, entity.posY + map.delta.Y));
             } else
             {
                 var currentFrame = CurrentFrame(entity.entityImage, new Rectangle(49 * 0, 45 * 2, entity.width, entity.height));
-                g.DrawImage(currentFrame, new Point(entity.posX, entity.posY));
+                g.DrawImage(currentFrame, new Point(entity.posX + map.delta.X, entity.posY + map.delta.Y));
             }
         }
 
@@ -91,14 +91,14 @@ namespace _2dShooter
         //    }
         //}
 
-        public void ShootAnimation()
+        public void ShootAnimation(Map map)
         {
             if (gunOwner.isShooting)
             {
                 var currentFrame = weapon.bulletImage;
                 var bulletX = gunOwner.posX + 40;
                 
-                weaponGraphics.DrawImage(currentFrame, new Point(bulletX, gunOwner.posY + 15));
+                weaponGraphics.DrawImage(currentFrame, new Point(bulletX + map.delta.X, gunOwner.posY + 15 + map.delta.Y));
                 
             }
             gunOwner.isShooting = false;

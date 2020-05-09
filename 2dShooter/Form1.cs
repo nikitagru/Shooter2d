@@ -30,13 +30,9 @@ namespace _2dShooter
             timer1.Interval = 30;
             timer1.Tick += new EventHandler(Update);
 
-
             KeyDown += new KeyEventHandler(OnPress);
             KeyUp += new KeyEventHandler(OnKeyUp);
             Init();
-
-
-
         }
 
 
@@ -48,11 +44,13 @@ namespace _2dShooter
                     player.isPressA = true;
                     player.isMoving = true;
                     player.flip = 1;
+                    
                     break;
                 case Keys.D:
                     player.isPressD = true;
                     player.isMoving = true;
                     player.flip = 0;
+                    
                     break;
                 case Keys.W:
                     if (player.isFalled)
@@ -78,7 +76,7 @@ namespace _2dShooter
 
         private void Update(object sender, EventArgs e)
         {
-            model.Falling(player, 5, map);
+            model.Falling(player, 5, map, this);
             Invalidate();
         }
 
@@ -96,7 +94,7 @@ namespace _2dShooter
         {
             Graphics g = e.Graphics;
             map.DrawMap(g);
-            view.PlayAnimation(g, player);
+            view.PlayAnimation(g, player, map);
             view.ShootInit(g, gun, player);
         }
 
@@ -105,16 +103,24 @@ namespace _2dShooter
             if (player.isPressA)
             {
                 model.MovingA(player, -5, 0, map);
+                if (player.posX > this.Width / 2 + 10 && player.posX < 32 * 30 - this.Width / 2 + 10)
+                {
+                    map.delta.X += 5;
+                }
                 model.Moving(player, 0, 0);
             }
             if (player.isPressD)
             {
                 model.MovingD(player, 5, 0, map);
+                if (player.posX > this.Width / 2 + 10 && player.posX < 32 * 30 - this.Width / 2 + 10)
+                {
+                    map.delta.X -= 5;
+                }
                 model.Moving(player, 0, 0);
             }
             if (player.isPressW)
             {
-                model.MovingW(player, -13, map);
+                model.MovingW(player, -13, map, this);
                 model.Moving(player, 0, 0);
             }
             if (player.isShooting)
@@ -124,7 +130,7 @@ namespace _2dShooter
         }
         private void Shoot(object sender, PaintEventArgs e)
         {
-            view.ShootAnimation();
+            view.ShootAnimation(map);
         }
     }
 }

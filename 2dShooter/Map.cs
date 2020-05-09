@@ -22,6 +22,7 @@ namespace _2dShooter
         public Image main;
         public Image wall;
         public Image vertWall;
+        public Point delta;
 
         public void Init()
         {
@@ -33,6 +34,7 @@ namespace _2dShooter
                 new Rectangle(0, 0, 32, 32));
             vertWall = view.CurrentFrame(new Bitmap(Properties.Resources.mainPlaceVert as Bitmap),
                 new Rectangle(0, 0, 32, 32));
+            delta = new Point(0, 0);
         }
 
         private int[,] GetMap()
@@ -71,27 +73,27 @@ namespace _2dShooter
                 {
                     if (map[i, j] == 1)
                     {
-                        g.DrawImage(backgroung, new Point(j * cellsize, i * cellsize));
+                        g.DrawImage(backgroung, new Point(j * cellsize + delta.X, i * cellsize + delta.Y));
                     }
                     if (map[i, j] == 4)
                     {
-                        g.DrawImage(backgroung, new Point(j * cellsize, i * cellsize));
+                        g.DrawImage(backgroung, new Point(j * cellsize + delta.X, i * cellsize + delta.Y));
                     }
                     if (map[i, j] == 6)
                     {
-                        g.DrawImage(backgroung, new Point(j * cellsize, i * cellsize));
+                        g.DrawImage(backgroung, new Point(j * cellsize + delta.X, i * cellsize + delta.Y));
                     }
                     if (map[i, j] == 2)
                     {
-                        g.DrawImage(main, new Point(j * cellsize, i * cellsize));
+                        g.DrawImage(main, new Point(j * cellsize + delta.X, i * cellsize + delta.Y));
                     }
                     if (map[i, j] == 3)
                     {
-                        g.DrawImage(wall, new Point(j * cellsize, i * cellsize));
+                        g.DrawImage(wall, new Point(j * cellsize + delta.X, i * cellsize + delta.Y));
                     }
                     if (map[i, j] == 5)
                     {
-                        g.DrawImage(vertWall, new Point(j * cellsize, i * cellsize));
+                        g.DrawImage(vertWall, new Point(j * cellsize + delta.X, i * cellsize + delta.Y));
                     }
                 }
             }

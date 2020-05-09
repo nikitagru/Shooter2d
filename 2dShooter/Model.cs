@@ -39,13 +39,18 @@ namespace _2dShooter
                 entity.posY += dirY;
             }
         }
-        public void MovingW(Entity entity, int dirY, Map map)
+        public void MovingW(Entity entity, int dirY, Map map, Form1 form)
         {
             if (IsCanMoving(map, entity, 0, dirY) && entity.isFalled)
             {
                 for(var i = 0; i < 12; i++)
                 {
                     entity.posY += dirY;
+                    if (entity.posY > form.Height / 2 + 10 && entity.posY < 32 * 30 - form.Height / 2 + 10)
+                    {
+                        map.delta.Y -= dirY;
+                    }
+                    
                 }
                 entity.isJumped = true;
             }
@@ -59,12 +64,17 @@ namespace _2dShooter
             entity.posY += dirY;
         }
 
-        public void Falling(Entity entity, int dirX, Map map)
+        public void Falling(Entity entity, int dirX, Map map, Form1 form)
         {
             var mapArr = map.map;
             if (mapArr[(Math.Abs(entity.posY) + dirX + 12) / map.linkSize, Math.Abs(entity.posX) / map.linkSize] != 6)
             {
                 entity.posY += dirX;
+                if (entity.posY > form.Height / 2 + 80 && entity.posY < 32 * 30 - form.Height / 2 + 80)
+                {
+                    map.delta.Y -= 5;
+                }
+                
             } else
             {
                 entity.isFalled = true;
