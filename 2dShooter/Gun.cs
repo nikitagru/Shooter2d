@@ -21,7 +21,7 @@ namespace _2dShooter
 
         public void Init()
         {
-            bulletImage = new Bitmap(Properties.Resources.bulletNew as Bitmap);
+            bulletImage = new Bitmap(Properties.Resources.bulletFin as Bitmap);
             width = bulletImage.Width;
             height = bulletImage.Height;
         }

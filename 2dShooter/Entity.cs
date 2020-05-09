@@ -24,7 +24,9 @@ namespace _2dShooter
 
         public bool isPressW;
         public bool isPressA;
+        public bool isWasPressedA;
         public bool isPressD;
+        public bool isWasPressedD;
         public bool isMoving;
         public bool isFalled;
         public bool isJumped;

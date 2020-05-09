@@ -41,16 +41,16 @@ namespace _2dShooter
             switch(e.KeyCode)
             {
                 case Keys.A:
-                    player.isPressA = true;
-                    player.isMoving = true;
                     player.flip = 1;
-                    
+                    player.isPressA = true;
+                    player.isWasPressedA = false;
+                    player.isMoving = true;
                     break;
                 case Keys.D:
-                    player.isPressD = true;
-                    player.isMoving = true;
                     player.flip = 0;
-                    
+                    player.isPressD = true;
+                    player.isWasPressedD = false;
+                    player.isMoving = true;
                     break;
                 case Keys.W:
                     if (player.isFalled)
@@ -63,6 +63,16 @@ namespace _2dShooter
                 case Keys.Space:
                     player.isShooting = true;
                     break;
+                default:
+                    if (player.isWasPressedA)
+                    {
+                        player.flip = 3;
+                    }
+                    if (player.isWasPressedD)
+                    {
+                        player.flip = 2;
+                    }
+                    break;
             }
         }
 
@@ -72,6 +82,7 @@ namespace _2dShooter
             player.isPressD = false;
             player.isPressA = false;
             player.isMoving = false;
+            
         }
 
         private void Update(object sender, EventArgs e)
@@ -102,20 +113,24 @@ namespace _2dShooter
         {
             if (player.isPressA)
             {
-                model.MovingA(player, -5, 0, map);
-                if (player.posX > this.Width / 2 + 10 && player.posX < 32 * 30 - this.Width / 2 + 10)
+                if (player.posX > this.Width / 2 && player.posX < 32 * 30 - this.Width / 2)
                 {
                     map.delta.X += 5;
                 }
+                model.MovingA(player, -5, 0, map);
+                
+                player.isWasPressedA = true;
                 model.Moving(player, 0, 0);
             }
             if (player.isPressD)
             {
-                model.MovingD(player, 5, 0, map);
-                if (player.posX > this.Width / 2 + 10 && player.posX < 32 * 30 - this.Width / 2 + 10)
+                if (player.posX > this.Width / 2 && player.posX < 32 * 30 - this.Width / 2)
                 {
                     map.delta.X -= 5;
                 }
+                model.MovingD(player, 5, 0, map);
+                
+                player.isWasPressedD = true;
                 model.Moving(player, 0, 0);
             }
             if (player.isPressW)
