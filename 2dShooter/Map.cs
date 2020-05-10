@@ -11,19 +11,22 @@ namespace _2dShooter
     {
         public View view = new View();
 
-        public static int mapWidth = 20;
-        public static int mapHeight = 30;
-        public static int cellsize = 32;
-        public int linkSize = cellsize;
+        public static int mapWidth = 20;        //Ширина карты(эквивалент координате Y)
+        public static int mapHeight = 30;       //Высота карты(эквивалент координате X)
+        public static int cellsize = 32;        //Размер отрисовки каждого кадра
+        public int linkSize = cellsize;         //Ссылка на переменную cellsize 
 
-        public int[,] map = new int[mapWidth, mapHeight];
+        public int[,] map = new int[mapWidth, mapHeight];       //Массив карты
 
-        public Image backgroung;
-        public Image main;
-        public Image wall;
-        public Image vertWall;
-        public Point delta;
+        public Image backgroung;        //Картинка заднего фона
+        public Image main;              //Картинка области, по которой может ходить персонаж
+        public Image wall;              //Горизонтальная стена
+        public Image vertWall;          //Вертикальная стена
+        public Point delta;             //Смещение отрисовки(следящая камера)
 
+        /// <summary>
+        /// Инициализация карты
+        /// </summary>
         public void Init()
         {
             map = GetMap();
@@ -37,11 +40,16 @@ namespace _2dShooter
             delta = new Point(0, 0);
         }
 
+
+        /// <summary>
+        /// Получение массива карты
+        /// </summary>
+        /// <returns></returns>
         private int[,] GetMap()
         {
             return new int[,]
             {
-                {5,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,5},
+                {5,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,5}, 
                 {5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,5},
                 {5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,5},
                 {5,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,5},
@@ -65,6 +73,10 @@ namespace _2dShooter
 
         }
 
+        /// <summary>
+        /// Отрисовка карты
+        /// </summary>
+        /// <param name="g">Графика</param>
         public void DrawMap(Graphics g)
         {
             for(var i = 0; i < mapWidth; i++)

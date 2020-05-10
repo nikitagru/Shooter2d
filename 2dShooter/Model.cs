@@ -8,6 +8,14 @@ namespace _2dShooter
 {
     public class Model
     {
+        /// <summary>
+        /// Проверка может ли персонаж двигаться дальше с встроенной конвертацией координат формы к координатам массива карты.
+        /// </summary>
+        /// <param name="map">Карта уровня</param>
+        /// <param name="entity">Персонаж</param>
+        /// <param name="dirX">Направление по X</param>
+        /// <param name="dirY">Направление по Y</param>
+        /// <returns></returns>
         public bool IsCanMoving(Map map, Entity entity, int dirX, int dirY)
         {
             var mapArr = map.map;
@@ -22,6 +30,13 @@ namespace _2dShooter
             return true;
         }
 
+        /// <summary>
+        /// Движение при нажатии на клавишу A
+        /// </summary>
+        /// <param name="entity">Персонаж</param>
+        /// <param name="dirX">Направление по X</param>
+        /// <param name="dirY">Направление по Y</param>
+        /// <param name="map">Карта уровня</param>
         public void MovingA(Entity entity, int dirX, int dirY, Map map) 
         {
             if (IsCanMoving(map, entity, dirX, dirY))
@@ -31,6 +46,14 @@ namespace _2dShooter
             }
             
         }
+
+        /// <summary>
+        /// Движение при нажатии на клавишу D
+        /// </summary>
+        /// <param name="entity">Персонаж</param>
+        /// <param name="dirX">Направление по X</param>
+        /// <param name="dirY">Направление по Y</param>
+        /// <param name="map">Карта уровня</param>
         public void MovingD(Entity entity, int dirX, int dirY, Map map)
         {
             if (IsCanMoving(map, entity, dirX, dirY))
@@ -39,6 +62,14 @@ namespace _2dShooter
                 entity.posY += dirY;
             }
         }
+
+        /// <summary>
+        /// Движение при нажатии на клавишу W
+        /// </summary>
+        /// <param name="entity">Персонаж</param>
+        /// <param name="dirY">Направление по Y</param>
+        /// <param name="map">Карта уровня</param>
+        /// <param name="form">Главная форма игры</param>
         public void MovingW(Entity entity, int dirY, Map map, Form1 form)
         {
             if (IsCanMoving(map, entity, 0, dirY) && entity.isFalled)
@@ -58,12 +89,24 @@ namespace _2dShooter
             entity.isFalled = false;
         }
 
+        /// <summary>
+        /// Окончание движения
+        /// </summary>
+        /// <param name="entity">Персонаж</param>
+        /// <param name="dirX">Направление по X</param>
+        /// <param name="dirY">Направление по Y</param>
         public void Moving(Entity entity, int dirX, int dirY)
         { 
             entity.posX += dirX;
             entity.posY += dirY;
         }
-
+        /// <summary>
+        /// Ускороние свободного падения.
+        /// </summary>
+        /// <param name="entity">Персонаж</param>
+        /// <param name="dirX">Направление по X</param>
+        /// <param name="map">Карта уровня</param>
+        /// <param name="form">Главная форма игры</param>
         public void Falling(Entity entity, int dirX, Map map, Form1 form)
         {
             var mapArr = map.map;
@@ -82,18 +125,5 @@ namespace _2dShooter
             
         }
 
-        //public void Shoting(Entity entity, Gun gun, Map map)
-        //{
-        //    var mapArr = map.map;
-        //    var mapY = entity.posY / map.linkSize;
-        //    var mapX = entity.posX / map.linkSize;
-        //    gun.posX = entity.posY;
-
-        //    while (mapArr[mapY, mapX + 1] == 1)
-        //    {
-        //        gun.posX++;
-        //        mapX++;
-        //    }
-        //}
     }
 }

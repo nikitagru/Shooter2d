@@ -12,15 +12,16 @@ namespace _2dShooter
 {
     public partial class Form1 : Form
     {
-        public Entity player;
+        public Entity player;       //Сущность игрока
+        public Entity enemy;        //Сущность врага
 
-        public Map map = new Map();
+        public Map map = new Map();     //Карта
 
-        public View view = new View();
+        public View view = new View();      
 
         public Model model = new Model();
 
-        Gun gun = new Gun();
+        Gun gun = new Gun();        //Оружие
 
         public static Image bullet;
         public Form1()
@@ -28,14 +29,18 @@ namespace _2dShooter
             InitializeComponent();
 
             timer1.Interval = 30;
-            timer1.Tick += new EventHandler(Update);
+            timer1.Tick += new EventHandler(Update);        //Передача метода обновления карты через каждое значение timer1.Interval
 
-            KeyDown += new KeyEventHandler(OnPress);
-            KeyUp += new KeyEventHandler(OnKeyUp);
-            Init();
+            KeyDown += new KeyEventHandler(OnPress);        //Обработка метода нажатия на кнопку
+            KeyUp += new KeyEventHandler(OnKeyUp);      //Обработка метода отпускания кнопки
+            Init();     //Инициализация формы
         }
 
-
+        /// <summary>
+        /// Обработка нажатий на каждую из кнопок управления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnPress(object sender, KeyEventArgs e)
         {
             switch(e.KeyCode)
@@ -63,10 +68,13 @@ namespace _2dShooter
                 case Keys.Space:
                     player.isShooting = true;
                     break;
-                
             }
         }
-
+        /// <summary>
+        /// Обработка отпускания кнопки управления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
             player.isPressW = false;
@@ -75,34 +83,51 @@ namespace _2dShooter
             player.isMoving = false;
             
         }
-
+        /// <summary>
+        /// Обновление формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Update(object sender, EventArgs e)
         {
             model.Falling(player, 5, map, this);
+            model.Falling(enemy, 5, map, this);
             Invalidate();
         }
-
+        /// <summary>
+        /// Инициализация формы
+        /// </summary>
         private void Init()
         {
-            map.Init();
-            gun.Init();
-            bullet = gun.bulletImage;
-            var playerPath = new Bitmap(Properties.Resources.finPlayer1 as Bitmap);
-            player = new Entity(310, 100, playerPath);
+            map.Init();     //Инициализация карты
+            gun.Init();     //Инициализация оружия
+            bullet = gun.bulletImage;       //Получение изображения выстрела
+            var playerPath = new Bitmap(Properties.Resources.finPlayer1 as Bitmap);     //Получение картинки спрайтов с игроком
+            player = new Entity(310, 100, playerPath);      //Инициализация экземпляра класса Entity - игрока
+            enemy = new Entity(350, 100, playerPath);       //Инициализация экземпляра класса Entity - врага
             timer1.Start();
         }
-
+        /// <summary>
+        /// Отрисовка формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            map.DrawMap(g);
-            view.PlayAnimation(g, player, map);
-            view.ShootInit(g, gun, player);
+            map.DrawMap(g);     //Отрисовка карты
+            view.PlayAnimation(g, player, map);     //Отрисовка анимации игрока
+            view.PlayAnimation(g, enemy, map);      //Отрисовка анимации врага
+            view.ShootInit(g, gun, player);         //Отрисовка оружия
         }
-
+        /// <summary>
+        /// Обработчик прохождения таймером промежутка timer1.Interval. Обработчик нажатий на кнопки управления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer1_Tick_1(object sender, EventArgs e)
         {
-            if (player.isPressA)
+            if (player.isPressA)        //Нажатие на кнопку А
             {
                 if (player.posX > this.Width / 2 && player.posX < 32 * 30 - this.Width / 2)
                 {
@@ -111,7 +136,7 @@ namespace _2dShooter
                 model.MovingA(player, -5, 0, map);
                 model.Moving(player, 0, 0);
             }
-            if (player.isPressD)
+            if (player.isPressD)        //Нажатие на кнопку D
             {
                 if (player.posX > this.Width / 2 && player.posX < 32 * 30 - this.Width / 2)
                 {
@@ -120,16 +145,21 @@ namespace _2dShooter
                 model.MovingD(player, 5, 0, map);
                 model.Moving(player, 0, 0);
             }
-            if (player.isPressW)
+            if (player.isPressW)        //Нажатие на кнопку W
             {
                 model.MovingW(player, -13, map, this);
                 model.Moving(player, 0, 0);
             }
-            if (player.isShooting)
+            if (player.isShooting)      //Отрисовка выстрела
             {
                 this.Paint += new PaintEventHandler(Shoot);
             }
         }
+        /// <summary>
+        /// Воспроизведение анимации выстрела.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Shoot(object sender, PaintEventArgs e)
         {
             view.ShootAnimation(map);

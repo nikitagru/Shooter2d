@@ -9,32 +9,36 @@ namespace _2dShooter
 {
     public class Entity
     {
-        public int posX;
-        public int posY;
+        public int posX;                        //Позиция по X
+        public int posY;                        //Позиция по Y
 
-        public int maxJumpHeight = 10;
-        public int currentJumpHeight = 0;
+        public int maxJumpHeight = 10;          //Максимальная высота прыжка
+        public int currentJumpHeight = 0;       //Нынешняя пройденная высота прыжком
 
-        public int currentAnimation;
-        public int currentLimit = 7;
+        public int currentAnimation;            //Нынешняя анимация для отрисовки движения
+        public int currentLimit = 7;            //Лимит кадров анимации движения
         
-        public int width = 49;
-        public int height = 45;
-        public int flip;
-        public int idleFlip;
+        public int width = 49;                  //Ширина персонажа
+        public int height = 45;                 //Высота персонажа
+        public int flip;                        //Поворот игрока в стороны для анимации движения(право, лево)
+        public int idleFlip;                    //Поворот игрока в стороны для анимации спокойствия(право, лево)
 
-        public bool isPressW;
+        public bool isPressW;                   
         public bool isPressA;
-        public bool isWasPressedA;
         public bool isPressD;
-        public bool isWasPressedD;
         public bool isMoving;
         public bool isFalled;
         public bool isJumped;
         public bool isShooting;
 
-        public Image entityImage;
+        public Image entityImage;               //Набор спрайтов для анимации движения персонажа
 
+        /// <summary>
+        /// Конструктор класса сущности
+        /// </summary>
+        /// <param name="posX">Позиция по X</param>
+        /// <param name="posY">Позиция по Y</param>
+        /// <param name="spriteSheet">Набор спрайтов для анимации движения</param>
         public Entity(int posX, int posY, Image spriteSheet)
         {
             this.posX = posX;

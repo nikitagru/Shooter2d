@@ -9,16 +9,14 @@ namespace _2dShooter
 {
     public class Gun
     {
-        public int width;
-        public int height;
+        public int width;       //Ширина выстрела
+        public int height;      //Высота выстрела
 
-        public int currentFrame;
-        public int frameLimit = 6;
+        public Image bulletImage;       //Изображение выстрела
 
-        public int posX;
-
-        public Image bulletImage;
-
+        /// <summary>
+        /// Инициализация оружия
+        /// </summary>
         public void Init()
         {
             bulletImage = new Bitmap(Properties.Resources.bulletFin as Bitmap);
