@@ -85,21 +85,21 @@ namespace _2dShooter
         /// Анимация выстрела
         /// </summary>
         /// <param name="map">Карта уровня</param>
-        public void ShootAnimation(Map map)
+        public void ShootAnimation(Map map, Graphics g, Gun gun, Entity entity)
         {
-            if (gunOwner.isShooting)        //Если нажата кнопка выстрела
+            if (entity.isShooting)        //Если нажата кнопка выстрела
             {
-                var currentFrame = CurrentFrame(weapon.bulletImage, new Rectangle(0, 10 * gunOwner.flip, 7, 10));
-                var bulletX = gunOwner.posX + 37 - (gunOwner.flip * 45);
+                var currentFrame = CurrentFrame(gun.bulletImage, new Rectangle(0, 10 * entity.flip, 7, 10));
+                var bulletX = entity.posX + 37 - (entity.flip * 45);
 
-                if (gunOwner.flip != 0)
+                if (entity.flip != 0)
                 {
                     bulletX += 7;
                 }
                 
-                weaponGraphics.DrawImage(currentFrame, new Point(bulletX + map.delta.X, gunOwner.posY + 15 + map.delta.Y));
+                g.DrawImage(currentFrame, new Point(bulletX + map.delta.X, entity.posY + 15 + map.delta.Y));
             }
-            gunOwner.isShooting = false;        //Прекращение выстрела
+            entity.isShooting = false;        //Прекращение выстрела
         }
         /// <summary>
         /// Инициализация полей для анимации выстрела
@@ -107,12 +107,12 @@ namespace _2dShooter
         /// <param name="g">Графика выстрела</param>
         /// <param name="gun">Оружие</param>
         /// <param name="entity">Персонаж(владелец оружия)</param>
-        public void ShootInit(Graphics g, Gun gun, Entity entity)
-        {
-            gunOwner = entity;
-            weapon = gun;
-            weaponGraphics = g;
-        }
+        //public void ShootInit(Graphics g, Gun gun, Entity entity)
+        //{
+        //    gunOwner = entity;
+        //    weapon = gun;
+        //    weaponGraphics = g;
+        //}
         /// <summary>
         /// Воспроизведение выстрела
         /// </summary>

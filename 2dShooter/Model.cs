@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace _2dShooter
 {
@@ -77,7 +78,7 @@ namespace _2dShooter
                 for(var i = 0; i < 12; i++)
                 {
                     entity.posY += dirY;
-                    if (entity.posY > form.Height / 2 + 10 && entity.posY < 32 * 30 - form.Height / 2 + 10)
+                    if (entity.posY > form.Height / 2 && entity.posY < 32 * 33 - form.Height / 2)
                     {
                         map.delta.Y -= dirY;
                     }
@@ -113,17 +114,35 @@ namespace _2dShooter
             if (mapArr[(Math.Abs(entity.posY) + dirX + 12) / map.linkSize, Math.Abs(entity.posX) / map.linkSize] != 6)
             {
                 entity.posY += dirX;
-                if (entity.posY > form.Height / 2 + 80 && entity.posY < 32 * 30 - form.Height / 2 + 80)
+                if (entity.posY > form.Height / 2 && entity.posY < 32 * 33 - form.Height / 2)
                 {
                     map.delta.Y -= 5;
                 }
-                
             } else
             {
                 entity.isFalled = true;
             }
-            
         }
+
+        public void EnemyTracking(Entity player, Entity enemy, Form1 form, Map map)
+        {
+            if (Math.Abs(player.posX - enemy.posX) <= form.Width)
+            {
+                if (player.posX < enemy.posX)
+                {
+                    enemy.flip = 1;
+                    enemy.isMoving = true;
+                    MovingA(enemy, -3, 0, map);
+                } else if (player.posX > enemy.posX)
+                {
+                    enemy.flip = 0;
+                    enemy.isMoving = true;
+                    MovingD(enemy, 3, 0, map);
+                }
+                enemy.isShooting = true;
+            }
+        }
+
 
     }
 }

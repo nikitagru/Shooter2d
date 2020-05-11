@@ -22,6 +22,7 @@ namespace _2dShooter
         public Model model = new Model();
 
         Gun gun = new Gun();        //Оружие
+        Gun enemygun = new Gun();
 
         public static Image bullet;
         public Form1()
@@ -92,6 +93,7 @@ namespace _2dShooter
         {
             model.Falling(player, 5, map, this);
             model.Falling(enemy, 5, map, this);
+            model.EnemyTracking(player,enemy,this, map);
             Invalidate();
         }
         /// <summary>
@@ -101,6 +103,7 @@ namespace _2dShooter
         {
             map.Init();     //Инициализация карты
             gun.Init();     //Инициализация оружия
+            enemygun.Init();
             bullet = gun.bulletImage;       //Получение изображения выстрела
             var playerPath = new Bitmap(Properties.Resources.finPlayer1 as Bitmap);     //Получение картинки спрайтов с игроком
             player = new Entity(310, 100, playerPath);      //Инициализация экземпляра класса Entity - игрока
@@ -118,7 +121,8 @@ namespace _2dShooter
             map.DrawMap(g);     //Отрисовка карты
             view.PlayAnimation(g, player, map);     //Отрисовка анимации игрока
             view.PlayAnimation(g, enemy, map);      //Отрисовка анимации врага
-            view.ShootInit(g, gun, player);         //Отрисовка оружия
+            //view.ShootInit(g, gun, player);         //Отрисовка оружия
+            //view.ShootInit(g, enemygun, enemy);
         }
         /// <summary>
         /// Обработчик прохождения таймером промежутка timer1.Interval. Обработчик нажатий на кнопки управления
@@ -129,20 +133,20 @@ namespace _2dShooter
         {
             if (player.isPressA)        //Нажатие на кнопку А
             {
-                if (player.posX > this.Width / 2 && player.posX < 32 * 30 - this.Width / 2)
+                if (player.posX > this.Width / 2 && player.posX < 32 * 36 - this.Width / 2)
                 {
-                    map.delta.X += 5;
+                    map.delta.X += 6;
                 }
-                model.MovingA(player, -5, 0, map);
+                model.MovingA(player, -6, 0, map);
                 model.Moving(player, 0, 0);
             }
             if (player.isPressD)        //Нажатие на кнопку D
             {
-                if (player.posX > this.Width / 2 && player.posX < 32 * 30 - this.Width / 2)
+                if (player.posX > this.Width / 2 && player.posX < 32 * 36 - this.Width / 2)
                 {
-                    map.delta.X -= 5;
+                    map.delta.X -= 6;
                 }
-                model.MovingD(player, 5, 0, map);
+                model.MovingD(player, 6, 0, map);
                 model.Moving(player, 0, 0);
             }
             if (player.isPressW)        //Нажатие на кнопку W
@@ -154,6 +158,11 @@ namespace _2dShooter
             {
                 this.Paint += new PaintEventHandler(Shoot);
             }
+            if (enemy.isShooting)      //Отрисовка выстрела
+            {
+                this.Paint += new PaintEventHandler(ShootEnemy);
+            }
+
         }
         /// <summary>
         /// Воспроизведение анимации выстрела.
@@ -162,7 +171,15 @@ namespace _2dShooter
         /// <param name="e"></param>
         private void Shoot(object sender, PaintEventArgs e)
         {
-            view.ShootAnimation(map);
+            Graphics g = e.Graphics;
+            view.ShootAnimation(map, g, gun, player);
         }
+
+        private void ShootEnemy(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            view.ShootAnimation(map, g, enemygun, enemy);
+        }
+
     }
 }
