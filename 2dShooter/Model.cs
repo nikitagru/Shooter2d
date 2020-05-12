@@ -19,16 +19,22 @@ namespace _2dShooter
         /// <returns></returns>
         public bool IsCanMoving(Map map, Entity entity, int dirX, int dirY)
         {
-            var mapArr = map.map;
-            
-            if (mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 1
-                && mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 6)
+            if (entity.isAlive)
             {
-                if (mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] == 4)
+                var mapArr = map.map;
+
+                if (mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 1
+                    && mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 6
+                    && mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 8
+                    && mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 0)
+                {
+                    if (mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] == 4)
+                        return false;
                     return false;
-                return false;
+                }
+                return true;
             }
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -44,6 +50,7 @@ namespace _2dShooter
             {
                 entity.posX += dirX;
                 entity.posY += dirY;
+                TakeHealth(entity, map);
             }
             
         }
@@ -61,6 +68,7 @@ namespace _2dShooter
             {
                 entity.posX += dirX;
                 entity.posY += dirY;
+                TakeHealth(entity, map);
             }
         }
 
@@ -111,7 +119,8 @@ namespace _2dShooter
         public void Falling(Entity entity, int dirX, Map map, Form1 form)
         {
             var mapArr = map.map;
-            if (mapArr[(Math.Abs(entity.posY) + dirX + 12) / map.linkSize, Math.Abs(entity.posX) / map.linkSize] != 6)
+            if (mapArr[(Math.Abs(entity.posY) + dirX + 12) / map.linkSize, Math.Abs(entity.posX) / map.linkSize] != 6
+                && mapArr[(Math.Abs(entity.posY) + dirX + 12) / map.linkSize, Math.Abs(entity.posX) / map.linkSize] != 0)
             {
                 entity.posY += dirX;
                 if (entity.posY > form.Height / 2 && entity.posY < 32 * 33 - form.Height / 2)
@@ -126,7 +135,7 @@ namespace _2dShooter
 
         public void EnemyTracking(Entity player, Entity enemy, Form1 form, Map map)
         {
-            if (Math.Abs(player.posX - enemy.posX) <= form.Width)
+            if (Math.Abs(player.posX - enemy.posX) <= form.Width / 2)
             {
                 if (player.posX < enemy.posX)
                 {
@@ -139,10 +148,38 @@ namespace _2dShooter
                     enemy.isMoving = true;
                     MovingD(enemy, 3, 0, map);
                 }
-                enemy.isShooting = true;
+                if (Math.Abs(player.posX - enemy.posX) < form.Width / 2 && Math.Abs(player.posY - enemy.posY) < 100 && enemy.isAlive)
+                {
+                    enemy.isShooting = true;
+                    player.health -= 1;
+                }
+                
             }
         }
 
+        public void ShootInEnnemy(Entity player, Entity enemy, Form1 form)
+        {
+            if (Math.Abs(player.posX - enemy.posX) < form.Width / 2 && Math.Abs(player.posY - enemy.posY) < 100)
+            {
+                enemy.health -= 50;
+            }
+        }
 
+        private void TakeHealth(Entity player, Map map)
+        {
+            var mapArr = map.map;
+
+            if (mapArr[(player.posY) / map.linkSize, (player.posX) / map.linkSize] == 8)
+            {
+                if (player.health >= 50)
+                {
+                    player.health = 100;
+                } else
+                {
+                    player.health += 50;
+                }
+                
+            }
+        }
     }
 }

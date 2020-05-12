@@ -42,7 +42,7 @@ namespace _2dShooter
         /// <param name="map">Карта уровня</param>
         public void PlayAnimation(Graphics g, Entity entity, Map map)
         {
-            if (entity.isMoving)        //Анимация обычного движения
+            if (entity.isMoving && entity.isAlive)        //Анимация обычного движения
             {
                 if (entity.isPressW)        //Анимация прыжка
                 {
@@ -87,19 +87,22 @@ namespace _2dShooter
         /// <param name="map">Карта уровня</param>
         public void ShootAnimation(Map map, Graphics g, Gun gun, Entity entity)
         {
-            if (entity.isShooting)        //Если нажата кнопка выстрела
+            if (entity.isAlive)
             {
-                var currentFrame = CurrentFrame(gun.bulletImage, new Rectangle(0, 10 * entity.flip, 7, 10));
-                var bulletX = entity.posX + 37 - (entity.flip * 45);
-
-                if (entity.flip != 0)
+                if (entity.isShooting)        //Если нажата кнопка выстрела
                 {
-                    bulletX += 7;
+                    var currentFrame = CurrentFrame(gun.bulletImage, new Rectangle(0, 10 * entity.flip, 7, 10));
+                    var bulletX = entity.posX + 37 - (entity.flip * 45);
+
+                    if (entity.flip != 0)
+                    {
+                        bulletX += 7;
+                    }
+
+                    g.DrawImage(currentFrame, new Point(bulletX + map.delta.X, entity.posY + 15 + map.delta.Y));
                 }
-                
-                g.DrawImage(currentFrame, new Point(bulletX + map.delta.X, entity.posY + 15 + map.delta.Y));
+                entity.isShooting = false;        //Прекращение выстрела
             }
-            entity.isShooting = false;        //Прекращение выстрела
         }
         /// <summary>
         /// Инициализация полей для анимации выстрела

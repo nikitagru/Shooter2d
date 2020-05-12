@@ -23,6 +23,8 @@ namespace _2dShooter
         public int flip;                        //Поворот игрока в стороны для анимации движения(право, лево)
         public int idleFlip;                    //Поворот игрока в стороны для анимации спокойствия(право, лево)
 
+        public int health;
+
         public bool isPressW;                   
         public bool isPressA;
         public bool isPressD;
@@ -30,6 +32,7 @@ namespace _2dShooter
         public bool isFalled;
         public bool isJumped;
         public bool isShooting;
+        public bool isAlive;
 
         public Image entityImage;               //Набор спрайтов для анимации движения персонажа
 
@@ -51,6 +54,8 @@ namespace _2dShooter
             this.isJumped = false;
             this.isShooting = false;
             this.idleFlip = 0;
+            this.health = 100;
+            this.isAlive = true;
         }
     }
 }

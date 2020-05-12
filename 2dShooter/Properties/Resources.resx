@@ -148,6 +148,9 @@
   <data name="mainPlaceVert" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mainPlaceVert.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="medikkit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\medikkit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="newPlayer1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\newPlayer1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

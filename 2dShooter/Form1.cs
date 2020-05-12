@@ -94,6 +94,11 @@ namespace _2dShooter
             model.Falling(player, 5, map, this);
             model.Falling(enemy, 5, map, this);
             model.EnemyTracking(player,enemy,this, map);
+            if (enemy.health <= 0)
+            {
+                enemy.isAlive = false;
+            }
+            label1.Text = player.health.ToString();
             Invalidate();
         }
         /// <summary>
@@ -106,8 +111,8 @@ namespace _2dShooter
             enemygun.Init();
             bullet = gun.bulletImage;       //Получение изображения выстрела
             var playerPath = new Bitmap(Properties.Resources.finPlayer1 as Bitmap);     //Получение картинки спрайтов с игроком
-            player = new Entity(310, 100, playerPath);      //Инициализация экземпляра класса Entity - игрока
-            enemy = new Entity(350, 100, playerPath);       //Инициализация экземпляра класса Entity - врага
+            player = new Entity(150, 100, playerPath);      //Инициализация экземпляра класса Entity - игрока
+            enemy = new Entity(750, 100, playerPath);       //Инициализация экземпляра класса Entity - врага
             timer1.Start();
         }
         /// <summary>
@@ -133,7 +138,7 @@ namespace _2dShooter
         {
             if (player.isPressA)        //Нажатие на кнопку А
             {
-                if (player.posX > this.Width / 2 && player.posX < 32 * 36 - this.Width / 2)
+                if (player.posX > this.Width / 2 && player.posX < 32 * 34 - this.Width / 2)
                 {
                     map.delta.X += 6;
                 }
@@ -142,7 +147,7 @@ namespace _2dShooter
             }
             if (player.isPressD)        //Нажатие на кнопку D
             {
-                if (player.posX > this.Width / 2 && player.posX < 32 * 36 - this.Width / 2)
+                if (player.posX > this.Width / 2 && player.posX < 32 * 34 - this.Width / 2)
                 {
                     map.delta.X -= 6;
                 }
@@ -157,6 +162,7 @@ namespace _2dShooter
             if (player.isShooting)      //Отрисовка выстрела
             {
                 this.Paint += new PaintEventHandler(Shoot);
+                model.ShootInEnnemy(player, enemy, this);
             }
             if (enemy.isShooting)      //Отрисовка выстрела
             {
