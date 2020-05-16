@@ -13,9 +13,6 @@ namespace _2dShooter
 {
     public class View
     {
-        private Entity gunOwner;        //Владелец оружия
-        private Graphics weaponGraphics;        //Графика для оружия
-        private Gun weapon;     //Экземпляр класса Gun - оружие
 
         private int posX;       //Позиция воспроизведения выстрела по Х
         private int posY;       //Позиция воспроизведения выстрела по Y
@@ -46,6 +43,7 @@ namespace _2dShooter
             {
                 if (entity.isPressW)        //Анимация прыжка
                 {
+                    entity.flip = entity.idleFlip;
                     entity.currentAnimation = 1;
                     if (entity.isPressA)
                     {
@@ -91,6 +89,7 @@ namespace _2dShooter
             {
                 if (entity.isShooting)        //Если нажата кнопка выстрела
                 {
+                    if (entity.flip > 1) entity.flip -= 2;
                     var currentFrame = CurrentFrame(gun.bulletImage, new Rectangle(0, 10 * entity.flip, 7, 10));
                     var bulletX = entity.posX + 37 - (entity.flip * 45);
 

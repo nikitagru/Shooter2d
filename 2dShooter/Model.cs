@@ -25,8 +25,7 @@ namespace _2dShooter
 
                 if (mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 1
                     && mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 6
-                    && mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 8
-                    && mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 0)
+                    && mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] != 8)
                 {
                     if (mapArr[(entity.posY + dirY) / map.linkSize, (entity.posX + dirX) / map.linkSize] == 4)
                         return false;
@@ -81,9 +80,10 @@ namespace _2dShooter
         /// <param name="form">Главная форма игры</param>
         public void MovingW(Entity entity, int dirY, Map map, Form1 form)
         {
-            if (IsCanMoving(map, entity, 0, dirY) && entity.isFalled)
+            
+            for(var i = 0; i < 12; i++)
             {
-                for(var i = 0; i < 12; i++)
+                if (IsCanMoving(map, entity, 0, dirY) && entity.isFalled)
                 {
                     entity.posY += dirY;
                     if (entity.posY > form.Height / 2 && entity.posY < 32 * 33 - form.Height / 2)
