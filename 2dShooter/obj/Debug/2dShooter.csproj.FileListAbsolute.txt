@@ -8,3 +8,4 @@ E:\С#_Projects\2dShooter\2dShooter\obj\Debug\2dShooter.csproj.GenerateResource.
 E:\С#_Projects\2dShooter\2dShooter\obj\Debug\2dShooter.csproj.CoreCompileInputs.cache
 E:\С#_Projects\2dShooter\2dShooter\obj\Debug\2dShooter.exe
 E:\С#_Projects\2dShooter\2dShooter\obj\Debug\2dShooter.pdb
+E:\С#_Projects\2dShooter\2dShooter\obj\Debug\_2dShooter.Dead.resources

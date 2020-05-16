@@ -34,6 +34,7 @@ namespace _2dShooter
         public bool isShooting;
         public bool isAlive;
         public bool isEnemy;
+        public bool end = false;
 
         public Image entityImage;               //Набор спрайтов для анимации движения персонажа
 

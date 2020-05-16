@@ -15,6 +15,8 @@ namespace _2dShooter
         public Entity player;       //Сущность игрока
         public Entity enemy;        //Сущность врага
 
+        private bool isOpenDead = false;
+
         #region дичь, которую надо переделать
         public Entity enemy2;
         public Entity enemy3;
@@ -54,6 +56,13 @@ namespace _2dShooter
             KeyDown += new KeyEventHandler(OnPress);        //Обработка метода нажатия на кнопку
             KeyUp += new KeyEventHandler(OnKeyUp);      //Обработка метода отпускания кнопки
             Init();     //Инициализация формы
+        }
+
+        private void Dead()
+        {
+            var deadForm = new Dead();
+            deadForm.Show();
+            this.Hide();
         }
 
         /// <summary>
@@ -173,6 +182,11 @@ namespace _2dShooter
             if (player.health < 1)
             {
                 player.isAlive = false;
+                if (!isOpenDead)
+                {
+                    Dead();
+                    isOpenDead = true;
+                }
             }
             Invalidate();
         }

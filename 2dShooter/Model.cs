@@ -136,25 +136,31 @@ namespace _2dShooter
 
         public void EnemyTracking(Entity player, Entity enemy, Form1 form, Map map)
         {
-            if (Math.Abs(player.posX - enemy.posX) <= form.Width / 2 && Math.Abs(player.posY - enemy.posY) < 100 && enemy.isAlive)
+            if (player.isAlive)
             {
-                if (player.posX < enemy.posX)
+                if (Math.Abs(player.posX - enemy.posX) <= form.Width / 2 && Math.Abs(player.posY - enemy.posY) < 100 && enemy.isAlive)
                 {
-                    enemy.flip = 1;
-                    enemy.isMoving = true;
-                    MovingA(enemy, -3, 0, map);
-                } else if (player.posX > enemy.posX)
-                {
-                    enemy.flip = 0;
-                    enemy.isMoving = true;
-                    MovingD(enemy, 3, 0, map);
+                    if (player.posX < enemy.posX)
+                    {
+                        enemy.flip = 1;
+                        enemy.isMoving = true;
+                        MovingA(enemy, -3, 0, map);
+                    }
+                    else if (player.posX > enemy.posX)
+                    {
+                        enemy.flip = 0;
+                        enemy.isMoving = true;
+                        MovingD(enemy, 3, 0, map);
+                    }
+                    if (Math.Abs(player.posX - enemy.posX) < form.Width / 2 && Math.Abs(player.posY - enemy.posY) < 100 && enemy.isAlive)
+                    {
+
+                        enemy.isShooting = true;
+                        player.health -= 1;
+
+                    }
+
                 }
-                if (Math.Abs(player.posX - enemy.posX) < form.Width / 2 && Math.Abs(player.posY - enemy.posY) < 100 && enemy.isAlive)
-                {
-                    enemy.isShooting = true;
-                    player.health -= 1;
-                }
-                
             }
         }
 

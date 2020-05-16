@@ -47,6 +47,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dead.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dead.Designer.cs">
+      <DependentUpon>Dead.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gun.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -60,6 +66,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View.cs" />
+    <EmbeddedResource Include="Dead.resx">
+      <DependentUpon>Dead.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +139,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\medikkit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deadScreen.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
