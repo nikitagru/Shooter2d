@@ -123,6 +123,7 @@ namespace _2dShooter
                 && mapArr[(Math.Abs(entity.posY) + dirX + 12) / map.linkSize, Math.Abs(entity.posX) / map.linkSize] != 0)
             {
                 entity.posY += dirX;
+                if (!entity.isEnemy)
                 if (entity.posY > form.Height / 2 && entity.posY < 32 * 33 - form.Height / 2)
                 {
                     map.delta.Y -= 5;
@@ -135,7 +136,7 @@ namespace _2dShooter
 
         public void EnemyTracking(Entity player, Entity enemy, Form1 form, Map map)
         {
-            if (Math.Abs(player.posX - enemy.posX) <= form.Width / 2)
+            if (Math.Abs(player.posX - enemy.posX) <= form.Width / 2 && Math.Abs(player.posY - enemy.posY) < 100 && enemy.isAlive)
             {
                 if (player.posX < enemy.posX)
                 {

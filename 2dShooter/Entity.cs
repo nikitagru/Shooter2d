@@ -33,6 +33,7 @@ namespace _2dShooter
         public bool isJumped;
         public bool isShooting;
         public bool isAlive;
+        public bool isEnemy;
 
         public Image entityImage;               //Набор спрайтов для анимации движения персонажа
 
@@ -56,6 +57,7 @@ namespace _2dShooter
             this.idleFlip = 0;
             this.health = 100;
             this.isAlive = true;
+            this.isEnemy = true;
         }
     }
 }
