@@ -1,6 +1,10 @@
 # Shooter2d
 My first 2d game in Windows Forms
 
-![alt text](screenshots/Снимок экрана 2020-11-20 130445.png)​
+
 
 ![Image alt](https://github.com/nikitagru/Shooter2d/raw/master/screenshots/1.png)
+![Image alt](https://github.com/nikitagru/Shooter2d/raw/master/screenshots/2.png)
+![Image alt](https://github.com/nikitagru/Shooter2d/raw/master/screenshots/3.png)
+![Image alt](https://github.com/nikitagru/Shooter2d/raw/master/screenshots/4.png)
+![Image alt](https://github.com/nikitagru/Shooter2d/raw/master/screenshots/5.png)
